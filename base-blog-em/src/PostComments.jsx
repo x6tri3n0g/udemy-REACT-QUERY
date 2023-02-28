@@ -28,12 +28,19 @@ const COMMENTS_STALE_TIME = 3000;
 
 export default function PostComments({ postId }) {
   const queryKey = useMemo(() => `/post/comment/${postId}`, [postId]);
-  const { data, isError, isLoading } = useQuery(queryKey, () => fetchComments(postId), {
+  const { data, isError, error, isLoading } = useQuery(queryKey, () => fetchComments(postId), {
     staleTime: COMMENTS_STALE_TIME,
   });
 
   if (isLoading) return <div>로딩중...</div>;
-  if (isError) return <div>에러 발생!</div>;
+  if (isError) {
+    return (
+      <>
+        <h3>에러 발생!</h3>
+        <p>{error.toString()}</p>
+      </>
+    );
+  }
 
   return (
     <>
