@@ -12,12 +12,14 @@ async function fetchPosts() {
   return response.json();
 }
 
+const POSTS_STALE_TIME = 2000;
+
 export function Posts() {
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedPost, setSelectedPost] = useState(null);
 
   const { data, isError, error, isLoading } = useQuery('posts', fetchPosts, { 
-    staleTime: 2000,
+    staleTime: POSTS_STALE_TIME,
   });
   
   if (isLoading) return <h3>Loading...</h3>;
