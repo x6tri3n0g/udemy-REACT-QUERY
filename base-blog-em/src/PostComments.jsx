@@ -27,10 +27,11 @@ async function updatePost(postId) {
 const COMMENTS_STALE_TIME = 3000;
 
 export default function PostComments({ postId }) {
-  const queryKey = useMemo(() => `/post/comment/${postId}`, [postId]);
-  const { data, isError, error, isLoading } = useQuery(queryKey, () => fetchComments(postId), {
-    staleTime: COMMENTS_STALE_TIME,
-  });
+  const { data, isError, error, isLoading } = useQuery(
+    ['comments', postId], 
+    () => fetchComments(postId), 
+    { staleTime: COMMENTS_STALE_TIME }
+  );
 
   if (isLoading) return <div>로딩중...</div>;
   if (isError) {
