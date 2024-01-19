@@ -13,23 +13,22 @@ export function InfiniteSpecies() {
     queryKey: ['sw-species'],
     queryFn: ({ pageParam = initialUrl }) => fetchUrl(pageParam),
     getNextPageParam: (lastPage) => {
+      // NOTE: lastPage가 거짓이거나 없으면 undefined를 반환
       return lastPage.next || undefined;
     }
   });
 
   if (isLoading) {
-    return <div className="loading">Loading...</div>
+    return <div className="loading">Loading...</div>;
   }
 
   if (isError) {
-    return <div>Error {error.toString()}</div>
+    return <div>Error {error.toString()}</div>;
   }
 
   return (
     <>
-      {isFetching && (
-        <div className="loading">Loading...</div>
-      )}
+      {isFetching && <div className="loading">Loading...</div>}
       <InfiniteScroll loadMore={fetchNextPage} hasMore={hasNextPage}>
         {data.pages.map((pageData) => {
           return pageData.results.map((species, index) => (
