@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES6",
     "module": "esnext",
     "moduleResolution": "node",
     "baseUrl": "src",
@@ -26,5 +26,10 @@
     "downlevelIteration": true,
     "strict": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "node_modules/@types"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "node_modules/@types",
+    "src/react-query/constants.js"
+  ]
 }
